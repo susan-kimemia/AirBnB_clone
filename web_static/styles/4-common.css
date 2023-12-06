@@ -1,0 +1,21 @@
+/*
+====================
+Body Style
+====================
+*/
+
+body{
+    font-family: Circular, "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font: size 14px;
+    font: color #484848;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+
+.container{
+    max-width: 1000px;
+    margin: 30px auto;
+    flex: 1
+}

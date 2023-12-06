@@ -1,0 +1,20 @@
+/*
+==========================
+Styles the header
+==========================
+*/
+
+header{
+border-bottom: 1px solid #CCCCCC;
+height: 70px;
+width: 100%;
+background-color: white;
+background-image: url('../images/logo');
+background-repeat: no-repeat;
+}
+
+.header{
+    background-image: url('../images/logo');
+    width: 140px;
+    height: 59px;
+}
