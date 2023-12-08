@@ -1,12 +1,15 @@
-# Introduction
-Welcome to the Airbnb Clone Console Prototype! This project serves as a basic prototype for creating and manipulating objects related to an Airbnb-like system through the console.
+# Welcome!
 
-## Table of Contents
+Welcome to our AirBnB Console Prototype project! This console application allows you to create and manage objects related to an Airbnb-like system through simple commands.
+
+## Project Overview
 1. [Features](#features)
 2. [Installation](#installation)
 3. [How to Use](#how-to-use)
 4. [Contributing](#contributing)
 5. [License](#license)
+
+## Getting Started
 
 ## Features
 * Object creation and manipulation through the console

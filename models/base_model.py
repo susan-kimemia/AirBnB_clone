@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This model contains the base class, parent to other classes.
+This model contains the base class for the entire project
 """
 import uuid
 from datetime import datetime
@@ -13,7 +13,7 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         """
-        Initializes instances with neccesary attributes.
+        Initializes instances with necces attribute Args
         """
 
         if kwargs:
@@ -32,29 +32,27 @@ class BaseModel:
 
     def save(self):
         """
-        saves Instances into storage file (json file).
+        saves Instances into storage json file
         """
 
         self.updated_at = datetime.now()
-        # reinitializes object for update
         models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
         """
-        returns a dictionary representation of the instance which contains all
-        attributes of the instance.
+        returns a obj_dictionary representation of the instance containing all keys
         """
 
-        diction = {}
-        diction["__class__"] = self.__class__.__name__
+        obj_diction = {}
+        obj_diction["__class__"] = self.__class__.__name__
 
         for key, value in self.__dict__.items():
             if isinstance(value, datetime):
-                diction[key] = value.isoformat()
+                obj_diction[key] = value.isoformat()
             else:
-                diction[key] = value
-        return diction
+                obj_diction[key] = value
+        return obj_diction
 
     def __str__(self):
         """

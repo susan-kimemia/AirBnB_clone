@@ -3,7 +3,7 @@
 Defines Amenity class for user
 """
 
-from .base_model import BaseModel
+from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):

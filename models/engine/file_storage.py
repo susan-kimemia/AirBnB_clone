@@ -61,7 +61,7 @@ class FileStorage:
 
     def Classes(self):
         """
-        dictionary of all classes
+        obj_dictionary of all classes
         """
         classes = {
             "BaseModel": BaseModel,
