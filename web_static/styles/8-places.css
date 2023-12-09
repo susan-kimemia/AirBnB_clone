@@ -26,14 +26,15 @@ article h2{
     font-size: 30px;
     text-align: center;
     justify-self: center;
+    margin: 0;
     flex: 1;
+    width: fit-content;
 }
 
 div.price_by_night{
     border: 4px solid #FF5A5F;
     border-radius: 50%;
     min-width: 60px;
-    width: 60px;
     height: 60px;
     font-size: 30px;
     text-align: center;
@@ -47,6 +48,7 @@ div.information{
     border-bottom: 1px solid #DDDDDD;
     align-items: center;
     justify-content: center;
+    display: flex;
 }
 
 .information div.max_guests{
@@ -61,6 +63,18 @@ div.information{
 }
 .information div{
     background-repeat: no-repeat;
-    width: 60px;
+    width: 100px;
     height: 60px;
+    margin: 0 auto 5px;
+    background-position: 20%;
 }
+
+.information div p{
+	margin: 0;
+	margin-top: 50px;
+}
+
+.place_and_price{
+	display: flex;
+}
+

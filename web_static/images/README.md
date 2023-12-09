@@ -1,1 +1,1 @@
-Project Images
+The images of the project
