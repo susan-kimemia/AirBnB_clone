@@ -37,18 +37,18 @@ class TestUserClass(unittest.TestCase):
 
         # Tests Values after assignment
         user.first_name = "John"
-        user.last_name = "Doe"
-        user.password = "Kilode gan"
-        user.email = "emilokan@gmail.com"
+        user.last_name = "Ken"
+        user.password = "unde7taker now"
+        user.email = "sandra@gmail.com"
         self.assertNotEqual(user.email, "")
         self.assertNotEqual(user.password, "")
         self.assertNotEqual(user.first_name, "")
         self.assertNotEqual(user.last_name, "")
-        user.id = "1223-3678-5thg-dkif"
+        user.id = "exc2378-yk"
         self.assertNotEqual(user.id, "")
 
-        user1.first_name = "Zach"
-        user1.password = "After Money na Money"
+        user1.first_name = "Ben"
+        user1.password = "nateg otke ys"
         self.assertEqual(user1.email, "")
         self.assertNotEqual(user1.password, "")
         self.assertNotEqual(user1.first_name, "")
@@ -69,9 +69,9 @@ class TestUserClass(unittest.TestCase):
         self.assertNotIn("__class__", user.__dict__)
 
         user.first_name = "John"
-        user.last_name = "Doe"
-        user.password = "Kilode gan"
-        user.email = "emilokan@gmail.com"
+        user.last_name = "Ken"
+        user.password = "unde7taker now"
+        user.email = "sandra@gmail.com"
 
         # Tests attributes class attributes and super class instances
         # after instanciation

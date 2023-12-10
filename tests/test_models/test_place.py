@@ -68,14 +68,14 @@ class TestPlaceClass(unittest.TestCase):
         self.assertEqual(place.user_id, user.id)
         self.assertNotEqual(place.user_id, Place.user_id)
 
-        place.name = "Basilica of Santa Maria"
-        self.assertEqual(place.name, "Basilica of Santa Maria")
+        place.name = "Holly family Basilica Church"
+        self.assertEqual(place.name, "Holly family Basilica Church")
         self.assertNotEqual(place.name, Place.name)
 
         place.city_id = city.id
         self.assertEqual(place.city_id, city.id)
 
-        place.description = "Beautiful and calm"
+        place.description = "Attractive and friendly"
         self.assertNotEqual(place.description, "")
 
         place.number_rooms = 10
@@ -126,9 +126,9 @@ class TestPlaceClass(unittest.TestCase):
         self.assertNotIn("__class__", place.__dict__)
 
         place.user_id = User().id
-        place.name = "Ibeju"
+        place.name = "Bissau"
         place.city_id = City().id
-        place.description = "Calm and nice"
+        place.description = "Comfortable and pleasing"
         place.number_rooms = 4
         place.number_bathrooms = 2
         place.longitude = 99

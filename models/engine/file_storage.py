@@ -20,14 +20,13 @@ class FileStorage:
     """
 
     __file_path = "file.json"
-    __objects = {}  # Stores all objects
+    __objects = {}
 
     def all(self):
         """
-        returns all objects
+        returns all dictionary of objects
         """
 
-        # self.reload()
         return FileStorage.__objects
 
     def new(self, obj):

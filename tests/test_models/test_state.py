@@ -39,8 +39,8 @@ class TestStateClass(unittest.TestCase):
 
         state = State()
 
-        state.name = "Taraba Jalingo"
-        self.assertEqual(state.name, "Taraba Jalingo")
+        state.name = "Dave Mase"
+        self.assertEqual(state.name, "Dave Mase")
         self.assertNotEqual(state.name, State().name)
 
     def test_to_dict(self):
@@ -49,7 +49,7 @@ class TestStateClass(unittest.TestCase):
 
         self.assertNotIn("name", state.to_dict())
 
-        state.name = "Ojuelegba"
+        state.name = "Tunisia"
 
         self.assertIn("name", state.to_dict())
 

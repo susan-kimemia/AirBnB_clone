@@ -46,11 +46,11 @@ class TestCityClass(unittest.TestCase):
         state = State()
         city = City()
 
-        state.name = "Taraba Jalingo"
-        city.name = "TransEkule"
+        state.name = "Dave Mase"
+        city.name = "Calabasas"
         city.state_id = state.id
-        self.assertEqual(state.name, "Taraba Jalingo")
-        self.assertEqual(city.name, "TransEkule")
+        self.assertEqual(state.name, "Dave Mase")
+        self.assertEqual(city.name, "Calabasas")
         self.assertNotEqual(state.name, State().name)
         self.assertNotEqual(city.name, City().name)
         self.assertNotEqual(city.state_id, City().state_id)
