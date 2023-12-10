@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Defines State Class, inherits from user.
+Define State Class
 """
 
 from models.base_model import BaseModel
@@ -8,7 +8,7 @@ from models.base_model import BaseModel
 
 class State(BaseModel):
     """
-    Defines User.
+    Inherited from the user
     """
 
     name = ""

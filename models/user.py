@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains User class definition.
+defines class of user
 """
 
 from models.base_model import BaseModel
@@ -8,7 +8,8 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """
-    User class
+    Definitions of User class
+    Representation
     """
 
     email = ""

@@ -8,15 +8,12 @@ import models
 
 
 class BaseModel:
-    """
-    base class parent to other classes
-    """
+    """base class parent to other classes"""
     def __init__(self, *args, **kwargs):
-        """
-        Initializes instances with necces attribute Args
-        """
+        """Initializes instances with
+        necces attribute Args"""
 
-        if kwargs:
+        while kwargs:
             if "__class__" in kwargs:
                 del kwargs["__class__"]
             for key, value in kwargs.items():
@@ -48,15 +45,13 @@ class BaseModel:
         obj_diction["__class__"] = self.__class__.__name__
 
         for key, value in self.__dict__.items():
-            if isinstance(value, datetime):
-                obj_diction[key] = value.isoformat()
-            else:
-                obj_diction[key] = value
+            obj_diction[key] = value.isoformat() \
+                    if isinstance(value, datetime) else value
         return obj_diction
 
     def __str__(self):
         """
-        returns printable string repsentation of the class instance.
+        returns printable string rep of the class
         """
 
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,

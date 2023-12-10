@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Defines the Review class for user and place
+Defination the Review class for user and place
 """
 
 from models.base_model import BaseModel
@@ -8,7 +8,8 @@ from models.base_model import BaseModel
 
 class Review(BaseModel):
     """
-    Defines Review for User
+    Defines Review class
+    Representation of place
     """
 
     place_id = ""
