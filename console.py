@@ -94,7 +94,7 @@ and prints the id
         if line in class_objects:
             '''retrieve class object'''
             class_obj = class_objects[line]
-            '''create instance'''
+            '''instance'''
             obj = class_obj()
             obj.save()
             print(obj.id)
@@ -114,7 +114,7 @@ based on the class name and id'''
             if class_name not in storage.Classes():
                 print("** class doesn't exist **")
                 return
-            elif len(lines) < 2:
+            if len(lines) < 2:
                 print("** instance id missing **")
                 return
             else:
@@ -136,22 +136,24 @@ Usage: destroy [Class] [id]
         if not line:
             print("** class name missing **")
             return
-        lines = line.split(' ')
-        class_name = lines[0]
-
-        if class_name not in storage.Classes():
-            print("** class doesn't exist **")
-            return
-        if len(lines) < 2:
-            print("** instance id missing **")
-            return
-        id_ = lines[1]
-        key = "{}.{}".format(class_name, id_)
-        if key not in storage.all():
-            print("** no instance found **")
         else:
-            del storage.all()[key]
-            storage.save()
+            lines = line.split(' ')
+            class_name = lines[0]
+
+            if class_name not in storage.Classes():
+                print("** class doesn't exist **")
+                return
+            if len(lines) < 2:
+                print("** instance id missing **")
+                return
+            else:
+                id_ = lines[1]
+                key = "{}.{}".format(class_name, id_)
+                if key not in storage.all():
+                    print("** no instance found **")
+                else:
+                    del storage.all()[key]
+                    storage.save()
 
     def do_all(self, line):
         '''Prints all string rep of all instances based or
@@ -166,21 +168,78 @@ not class name'''
                 print("** class doesn't exist **")
                 return
             else:
-                for key, value in storage.all().items():
-                    if class_name in key:
-                        # each matching  model
-                        mo = storage.Classes()[class_name](**value)
-                        all_models.append(str(mo))
+                key_iterator = iter(storage.all())
+                while True:
+                    try:
+                        key, value = next(key_iterator)
+                        if class_name in key:
+                            # each matching  model
+                            mo = storage.Classes()[class_name](**value)
+                            all_models.append(str(mo))
+                    except StopIteration:
+                        break
         else:
-            for key, value in storage.all().items():
-                class_name = key.split('.')[0]
-                all_models.append(str(storage.Classes()[class_name](**value)))
+            key_iterator = iter(storage.all())
+            while True:
+                try:
+                    key, value = next(key_iterator)
+                    class_name = key.split('.')[0]
+                    all_models.append(str(storage.Classes()[class_name](
+                        **value)))
+                except StopIteration:
+                    break
         print(all_models)
 
+    def do_update(self, line):
+        """
+Updates an instance attribute.
+        """
+
+        if not line:
+            print("** class name missing **")
+            return
+        else:
+            lines = line.split(' ')
+            class_name = lines[0]
+
+            if class_name not in storage.Classes():
+                print("** class doesn't exist **")
+                return
+            if len(lines) < 2:
+                print("** instance id missing **")
+                return
+            if class_name + '.' + lines[1] not in storage.all():
+                print("** no instance found **")
+                return
+            if len(lines) < 3:
+                print("** attribute name missing **")
+                return
+            # Extracts Dictionary if there is on
+            if '{' in lines[2] and type(eval(' '.join(lines[2:]))) is dict:
+                new_values = eval(' '.join(lines[2:]))
+
+                iter_items = iter(new_values.items())
+                while True:
+                    try:
+                        key, value = next(iter_items)
+                        if key not in ("id", "created_at", "updated_at"):
+                            storage.all()[class_name + '.' + lines[1]][key] = \
+                                    value
+                    except StopIteration:
+                        break
+                storage.save()
+            else:
+                if len(lines) < 4:
+                    print("** value missing **")
+                    return
+
+                key = class_name + '.' + lines[1]
+                if lines[2] not in ('updated_at', 'created_at', 'id'):
+                    storage.all()[key].update({lines[2]: eval(lines[3])})
+                    storage.save()
+
     def do_count(self, line):
-        """
-Counts Number of Class Instance
-        """
+        """Counts Number of Class Instance"""
         count = 0
         if not line:
             print("** class name missing **")
@@ -192,49 +251,16 @@ Counts Number of Class Instance
                 print("** class doesn't exist **")
                 return
 
-        for key in storage.all():
-            if class_name in key:
-                count += 1
+        key_iterator = iter(storage.all())
+        while True:
+            try:
+                key = next(key_iterator)
+                if class_name in key:
+                    count += 1
+            except StopIteration:
+                break
+
         print(count)
-
-    def do_update(self, line):
-        """
-Updates an instance attribute.
-        """
-
-        if not line:
-            print("** class name missing **")
-            return
-        lines = line.split(' ')
-        class_name = lines[0]
-        if class_name not in storage.Classes():
-            print("** class doesn't exist **")
-            return
-        if len(lines) < 2:
-            print("** instance id missing **")
-            return
-        if class_name + '.' + lines[1] not in storage.all():
-            print("** no instance found **")
-            return
-        if len(lines) < 3:
-            print("** attribute name missing **")
-            return
-        # Extracts Dictionary if there is on
-        if '{' in lines[2] and type(eval(' '.join(lines[2:]))) is dict:
-            new_values = eval(' '.join(lines[2:]))
-            for key, value in new_values.items():
-                if key not in ("id", "created_at", "updated_at"):
-                    storage.all()[class_name + '.' + lines[1]][key] = value
-            storage.save()
-        else:
-            if len(lines) < 4:
-                print("** value missing **")
-                return
-
-            key = class_name + '.' + lines[1]
-            if lines[2] not in ('updated_at', 'created_at', 'id'):
-                storage.all()[key].update({lines[2]: eval(lines[3])})
-                storage.save()
 
 
 if __name__ == '__main__':
