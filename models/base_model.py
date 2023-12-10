@@ -13,7 +13,7 @@ class BaseModel:
         """Initializes instances with
         necces attribute Args"""
 
-        while kwargs:
+        if kwargs:
             if "__class__" in kwargs:
                 del kwargs["__class__"]
             for key, value in kwargs.items():
@@ -53,7 +53,7 @@ class BaseModel:
 
     def __str__(self):
         """
-        returns printable string rep of the class
+        returns printable string repsentation of the class instance.
         """
 
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
