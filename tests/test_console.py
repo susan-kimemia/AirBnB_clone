@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Test for the console interpreter
-"""
+"""test console interpreter"""
 
 import re
 import unittest
@@ -210,9 +208,7 @@ instance based on the class name and id"""
         self.helper_test_all_with_class("Amenity")
 
     def helper_test_update_command(self, class_name):
-        """
-        Tests the Update command.
-        """
+        """Tests the Update command"""
 
         obj_ = FileStorage().Classes()[class_name]()
         obj_.save()
@@ -246,9 +242,7 @@ instance based on the class name and id"""
         self.helper_test_update_command("Review")
 
     def helper_test_destroy_command(self, class_name):
-        """
-        Tests the Update command.
-        """
+        """Tests the Update command"""
 
         obj_ = FileStorage().Classes()[class_name]()
         obj_.save()
@@ -262,7 +256,7 @@ instance based on the class name and id"""
 
     def test_destroy_command(self):
         """
-        test update command on all classes.
+        test update command on all classes
         """
 
         self.helper_test_destroy_command("BaseModel")
@@ -274,9 +268,7 @@ instance based on the class name and id"""
         self.helper_test_destroy_command("Review")
 
     def helper_test_show_command(self, class_name):
-        """
-        Tests the Update command.
-        """
+        """Tests update command"""
 
         obj_ = FileStorage().Classes()[class_name]()
         obj_.save()
@@ -302,9 +294,7 @@ instance based on the class name and id"""
         self.helper_test_show_command("Review")
 
     def helper_test_create_command(self, class_name):
-        """
-        Tests the create command.
-        """
+        """Tests the create command"""
 
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             console.HBNBCommand().onecmd("{}.create()".format(class_name))
@@ -330,9 +320,7 @@ instance based on the class name and id"""
         self.helper_test_create_command("Review")
 
     def helper_test_count_command(self, class_name):
-        """
-        Tests the create command.
-        """
+        """Tests the create command"""
 
         count = 0
         for obj in FileStorage().all():
@@ -358,18 +346,14 @@ instance based on the class name and id"""
         self.helper_test_count_command("Review")
 
     def test_EOF(self):
-        """
-        Tests EOF
-        """
+        """Tests EOF"""
 
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             console.HBNBCommand().onecmd("EOF")
             self.assertEqual('', mock_stdout.getvalue().strip())
 
     def test_quit(self):
-        """
-        Tests quit command
-        """
+        """Tests quit command"""
 
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             console.HBNBCommand().onecmd("quit")
