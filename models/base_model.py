@@ -27,6 +27,30 @@ class BaseModel:
             self.updated_at = datetime.now()
             models.storage.new(self)
 
+    def save(self):
+        """
+        saves Instances into storage json file
+        """
+
+        self.updated_at = datetime.now()
+        models.storage.new(self)
+        models.storage.save()
+
+    def to_dict(self):
+        """
+        returns a obj_dictionary rep of the instance containing all keys
+        """
+
+        obj_diction = {}
+        obj_diction["__class__"] = self.__class__.__name__
+
+        for key, value in self.__dict__.items():
+            if isinstance(value, datetime):
+                obj_diction[key] = value.isoformat()
+            else:
+                obj_diction[key] = value
+        return obj_diction
+
     def __str__(self):
         """
         returns printable string repsentation of the class instance.
