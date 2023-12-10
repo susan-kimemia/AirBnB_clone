@@ -25,25 +25,25 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def precmd(self, line):
-        """edits line"""
+        """edits line b4 executing"""
 
         if '.' in line and ('(' in line and ')' in line):
-            # re-order line
-            line = re.sub(r"\.(\w+)\((.+)\)", r"\2 \1 \3", line)
-            # strip quotation marks
-            line = line.replace('"', '').replace("'", '')
-            # split line
+            line = line.replace('.', ' ').replace('(', ' ').replace(')', ' ')
             line = line.split()
-
-            # try-except block to handle potential errors
+            line[1], line[0] = line[0], line[1]
             try:
-                # handle dictionary argument
+                # removes quotation arround id passed as argument
+                line[2] = line[2].replace('"', '').replace("'", '')
+                line[2] = line[2].replace(',', '')
+
+                # protects the commas in the dictionary representation passed
                 if not ('{' in line[3] or '}' in line[3]):
+                    line[3] = line[3].replace('"', '').replace("'", "")
                     line[3] = ' '.join(line[3:])
+                    line[3] = line[3].replace(',', '')
                     line = line[:4]
             except IndexError:
                 pass
-
             line = ' '.join(line)
             return cmd.Cmd.precmd(self, line)
         else:
@@ -53,22 +53,22 @@ class HBNBCommand(cmd.Cmd):
         """edits line"""
 
         if '.' in line and ('(' in line and ')' in line):
-            # re-order line
-            line = re.sub(r"\.(\w+)\((.+)\)", r"\2 \1 \3", line)
-            # strip quotation marks
-            line = line.replace('"', '').replace("'", '')
-            # split line
+            line = line.replace('.', ' ').replace('(', ' ').replace(')', ' ')
             line = line.split()
-
-            # try-except block to handle potential errors
+            line[1], line[0] = line[0], line[1]
             try:
-                # handle dictionary argument
+                # removes quotation arround id passed as argument
+                line[2] = line[2].replace('"', '').replace("'", '')
+                line[2] = line[2].replace(',', '')
+
+                # protects the commas in the dictionary representation passed
                 if not ('{' in line[3] or '}' in line[3]):
+                    line[3] = line[3].replace('"', '').replace("'", "")
                     line[3] = ' '.join(line[3:])
+                    line[3] = line[3].replace(',', '')
                     line = line[:4]
             except IndexError:
                 pass
-
             line = ' '.join(line)
             return cmd.Cmd.onecmd(self, line)
         else:
@@ -89,10 +89,12 @@ and prints the id
         if not line:
             print("** class name missing **")
             return
-
+        '''retrieve class name as key'''
         class_objects = storage.Classes()
         if line in class_objects:
+            '''retrieve class object'''
             class_obj = class_objects[line]
+            '''create instance'''
             obj = class_obj()
             obj.save()
             print(obj.id)
@@ -101,10 +103,8 @@ and prints the id
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        '''
-Prints the string rep of an instance
-based on the class name and id
-        '''
+        '''Prints the string rep of an instance
+based on the class name and id'''
         if not line:
             print("** class name missing **")
             return
@@ -138,6 +138,7 @@ Usage: destroy [Class] [id]
             return
         lines = line.split(' ')
         class_name = lines[0]
+
         if class_name not in storage.Classes():
             print("** class doesn't exist **")
             return
@@ -153,10 +154,8 @@ Usage: destroy [Class] [id]
             storage.save()
 
     def do_all(self, line):
-        '''
-Prints all string rep of all instances based or
-not class name
-        '''
+        '''Prints all string rep of all instances based or
+not class name'''
         all_models = []
 
         if line:
@@ -220,7 +219,6 @@ Updates an instance attribute.
         if len(lines) < 3:
             print("** attribute name missing **")
             return
-
         # Extracts Dictionary if there is on
         if '{' in lines[2] and type(eval(' '.join(lines[2:]))) is dict:
             new_values = eval(' '.join(lines[2:]))
