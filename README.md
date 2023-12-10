@@ -13,7 +13,7 @@ Welcome to our AirBnB Console Prototype project! This console application allows
 
 ## Features
 * Object creation and manipulation through the console
-* Storage for objects
+* Storage
 
 ## Installation
 1. Clone the repository to your local machine
@@ -25,11 +25,40 @@ Welcome to our AirBnB Console Prototype project! This console application allows
 2. run `./console.py`
 
 ## Examples
-1. to create a User
-`$ ./console.py
-(hbnb) Create User
-1ebf9a71-c965-4f9a-982f-c8f05d6d1498
-(hbnb) `
-2. to show User attributes
-`(hbnb) show User (1ebf9a71-c965-4f9a-982f-c8f05d6d1498)
-[User] (1ebf9a71-c965-4f9a-982f-c8f05d6d1498) {'id': '1ebf9a71-c965-4f9a-982f-c8f05d6d1498', 'created_at': datetime.datetime(2023, 11, 11, 11, 18, 39, 647000), 'updated_at': datetime.datetime(2023, 11, 11, 11, 18, 39, 647437)}`
+1. Interactive mode execution:
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb)
+(hbnb)
+(hbnb) quit
+$
+
+2. non-interactive mode execution:
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb)
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb)
+$
+
+
+All tests should also pass in non-interactive mode:
+$ echo "python3 -m unittest discover tests" | bash
