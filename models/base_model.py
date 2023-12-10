@@ -45,8 +45,10 @@ class BaseModel:
         obj_diction["__class__"] = self.__class__.__name__
 
         for key, value in self.__dict__.items():
-            obj_diction[key] = value.isoformat() \
-                    if isinstance(value, datetime) else value
+            if isinstance(value, datetime):
+                obj_diction[key] = value.isoformat()
+            else:
+                obj_diction[key] = value
         return obj_diction
 
     def __str__(self):
