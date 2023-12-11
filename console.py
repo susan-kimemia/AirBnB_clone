@@ -32,11 +32,11 @@ class HBNBCommand(cmd.Cmd):
             line = line.split()
             line[1], line[0] = line[0], line[1]
             try:
-                # removes quotation arround id passed as argument
+                # removes quotation arround id
                 line[2] = line[2].replace('"', '').replace("'", '')
                 line[2] = line[2].replace(',', '')
 
-                # protects the commas in the dictionary representation passed
+                # protects the commas in the dict
                 if not ('{' in line[3] or '}' in line[3]):
                     line[3] = line[3].replace('"', '').replace("'", "")
                     line[3] = ' '.join(line[3:])
@@ -57,11 +57,11 @@ class HBNBCommand(cmd.Cmd):
             line = line.split()
             line[1], line[0] = line[0], line[1]
             try:
-                # removes quotation arround id passed as argument
+                # removes quotation arround id
                 line[2] = line[2].replace('"', '').replace("'", '')
                 line[2] = line[2].replace(',', '')
 
-                # protects the commas in the dictionary representation passed
+                # protects the commas in the dict
                 if not ('{' in line[3] or '}' in line[3]):
                     line[3] = line[3].replace('"', '').replace("'", "")
                     line[3] = ' '.join(line[3:])
@@ -76,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         '''
-Quit command to exit the program
+Quit command, exit program
         '''
         return True
 
